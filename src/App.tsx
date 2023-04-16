@@ -1,9 +1,17 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+
 import './App.css'
+import { AUTO_LANGUAGE } from './models/interfaces.d';
+import { ArrowsIcon } from './assets/Icons';
+
 import useTranslator from './hooks/useTranslator'
+import LanguageSelector from './Components/LanguageSelector';
 
 function App () {
   const {
-    state,
+    fromLanguage,
+    toLanguage,
     switchLanguages,
     setFromLanguage,
     setToLanguage,
@@ -12,19 +20,24 @@ function App () {
   } = useTranslator()
 
   return (
-    <div className="App">
-      <h1>Google Translator Clone</h1>
-      <hr />
-      <select>
-        <option value="es">Spanish</option>
-      </select>
-      <textarea placeholder='Insert text to translate'></textarea>
-      <textarea placeholder='Translation'></textarea>
-      <button onClick={() => { setFromLanguage('es') }}>Switch</button>
-      {
-        JSON.stringify(state)
-      }
-    </div>
+    <Container fluid>
+      <h2 className='text-center'>Google Translate</h2>
+      <Row>
+        <Col>
+          <LanguageSelector />
+        </Col>
+
+        <Col style={{ display: 'flex', justifyContent: 'center'}}>
+          <Button variant='link' disabled={ fromLanguage === AUTO_LANGUAGE } onClick={switchLanguages}>
+            <ArrowsIcon />
+          </Button>
+        </Col>
+
+        <Col>
+          <LanguageSelector />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

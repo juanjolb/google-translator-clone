@@ -1,4 +1,4 @@
-import { ActionTypes, type Translator, type TranslatorActions, type Language, type FromLanguage } from '../models/interfaces.d'
+import { ActionTypes, type Translator, type TranslatorActions, type Language, type FromLanguage, AUTO_LANGUAGE } from '../models/interfaces.d'
 import { useReducer } from 'react'
 
 const initialValues: Translator = {
@@ -13,6 +13,10 @@ function reducer (state: Translator, action: TranslatorActions) {
   const { type, payload } = action
 
   if (type === ActionTypes.SWITCH_LANGUAGES) {
+
+    const { fromLanguage } = state 
+    if (fromLanguage === AUTO_LANGUAGE) return state
+    
     return {
       ...state,
       fromLanguage: state.toLanguage,
@@ -51,7 +55,7 @@ function reducer (state: Translator, action: TranslatorActions) {
 }
 
 function useTranslator () {
-  const [state, dispatch] = useReducer(reducer, initialValues)
+  const [{fromLanguage, toLanguage}, dispatch] = useReducer(reducer, initialValues)
 
   const switchLanguages = () => {
     dispatch({ type: ActionTypes.SWITCH_LANGUAGES })
@@ -74,7 +78,8 @@ function useTranslator () {
   }
 
   return {
-    state,
+    fromLanguage, 
+    toLanguage,
     switchLanguages,
     setFromLanguage,
     setToLanguage,

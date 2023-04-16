@@ -19,13 +19,13 @@ export type TranslatorActions =
   | { type: ActionTypes.TO_LANGUAGE, payload: string }
   | { type: ActionTypes.TRANSLATE_TEXT, payload: string }
 
-const SUPPORTED_LANGUAGES = {
+export const SUPPORTED_LANGUAGES = {
   en: 'English',
   es: 'Spanish',
   de: 'Deutsch'
 } as const
-const AUTO_LANGUAGE = 'auto'
 
+export const AUTO_LANGUAGE = 'auto'
 export type Language = keyof typeof SUPPORTED_LANGUAGES
 export type AutoLanguage = typeof AUTO_LANGUAGE
 export type FromLanguage = Language | AutoLanguage
