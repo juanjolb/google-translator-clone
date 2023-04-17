@@ -25,6 +25,11 @@ export const SUPPORTED_LANGUAGES = {
   de: 'Deutsch'
 } as const
 
+export const SELECTOR_TYPE = {
+  FROM: 'from',
+  TO: 'to'
+} as const
+
 export const AUTO_LANGUAGE = 'auto'
 export type Language = keyof typeof SUPPORTED_LANGUAGES
 export type AutoLanguage = typeof AUTO_LANGUAGE

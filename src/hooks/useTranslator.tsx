@@ -13,10 +13,9 @@ function reducer (state: Translator, action: TranslatorActions) {
   const { type, payload } = action
 
   if (type === ActionTypes.SWITCH_LANGUAGES) {
-
-    const { fromLanguage } = state 
+    const { fromLanguage } = state
     if (fromLanguage === AUTO_LANGUAGE) return state
-    
+
     return {
       ...state,
       fromLanguage: state.toLanguage,
@@ -55,7 +54,7 @@ function reducer (state: Translator, action: TranslatorActions) {
 }
 
 function useTranslator () {
-  const [{fromLanguage, toLanguage}, dispatch] = useReducer(reducer, initialValues)
+  const [{ fromLanguage, toLanguage }, dispatch] = useReducer(reducer, initialValues)
 
   const switchLanguages = () => {
     dispatch({ type: ActionTypes.SWITCH_LANGUAGES })
@@ -78,7 +77,7 @@ function useTranslator () {
   }
 
   return {
-    fromLanguage, 
+    fromLanguage,
     toLanguage,
     switchLanguages,
     setFromLanguage,
