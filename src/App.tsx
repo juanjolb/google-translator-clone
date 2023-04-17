@@ -7,9 +7,13 @@ import { ArrowsIcon } from './assets/Icons'
 
 import useTranslator from './hooks/useTranslator'
 import LanguageSelector from './Components/LanguageSelector'
+import TextArea from './Components/TextArea'
 
 function App () {
   const {
+    text,
+    translatedText,
+    loading,
     fromLanguage,
     toLanguage,
     switchLanguages,
@@ -25,9 +29,10 @@ function App () {
       <Row>
         <Col>
           <LanguageSelector type={SELECTOR_TYPE.FROM} value={fromLanguage} onChange={setFromLanguage}/>
+          <TextArea type={SELECTOR_TYPE.FROM} value={text} onChange={setFromText}/>
         </Col>
 
-        <Col style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col className='switch-col'>
           <Button variant='link' disabled={ fromLanguage === AUTO_LANGUAGE } onClick={switchLanguages}>
             <ArrowsIcon />
           </Button>
@@ -35,6 +40,7 @@ function App () {
 
         <Col>
           <LanguageSelector type={SELECTOR_TYPE.TO} value={toLanguage} onChange={setToLanguage}/>
+          <TextArea type={SELECTOR_TYPE.TO} value={translatedText} loading={loading} onChange={translateText}/>
         </Col>
       </Row>
     </Container>

@@ -61,6 +61,17 @@ button:focus-visible {
 
 select.form-select {
   width: 180px;
+  margin-bottom: 20px;
+}
+
+.col.switch-col {
+  display: flex;
+  justify-content: center;
+  align-items: self-start;
+}
+
+textarea {
+  resize: none;
 }
 
 @media (prefers-color-scheme: light) {

@@ -40,7 +40,8 @@ function reducer (state: Translator, action: TranslatorActions) {
   if (type === ActionTypes.SET_FROMTEXT) {
     return {
       ...state,
-      toLanguage: payload
+      loading: true,
+      text: payload
     }
   }
 
@@ -54,7 +55,7 @@ function reducer (state: Translator, action: TranslatorActions) {
 }
 
 function useTranslator () {
-  const [{ fromLanguage, toLanguage }, dispatch] = useReducer(reducer, initialValues)
+  const [{ fromLanguage, toLanguage, text, translatedText, loading }, dispatch] = useReducer(reducer, initialValues)
 
   const switchLanguages = () => {
     dispatch({ type: ActionTypes.SWITCH_LANGUAGES })
@@ -68,15 +69,18 @@ function useTranslator () {
     dispatch({ type: ActionTypes.TO_LANGUAGE, payload })
   }
 
-  const setFromText = (payload: Language) => {
+  const setFromText = (payload: string) => {
     dispatch({ type: ActionTypes.SET_FROMTEXT, payload })
   }
 
-  const translateText = (payload: Language) => {
+  const translateText = (payload: string) => {
     dispatch({ type: ActionTypes.TRANSLATE_TEXT, payload })
   }
 
   return {
+    text,
+    translatedText,
+    loading,
     fromLanguage,
     toLanguage,
     switchLanguages,
